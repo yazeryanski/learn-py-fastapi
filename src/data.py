@@ -1,15 +1,17 @@
 from faker import Faker
 from time import time
 from src.models.student import Department, Student
-from typing import List
+
 
 # [BENCHMARK] benchmarking the data generation process
 start_time = time()
 
-students: List[Student] = []
+students: list[Student] = []
+students_search_indexes: dict[int, str] = {}
+
 faker = Faker()
 
-for i in range(20):
+for i in range(500):
     students.append(
         Student(
             id=i,
@@ -21,6 +23,12 @@ for i in range(20):
             department=faker.random_element(elements=list(Department))
         )
     )
+    
+    students_search_indexes[i] = (
+        f"{students[i].name} {students[i].surname} {students[i].age} "
+        f"{students[i].grade} {students[i].absences} {students[i].department}"
+    )
+    students_search_indexes[i] = students_search_indexes[i].lower()
 
 # [BENCHMARK] Print the time taken to generate the data
 end_time = time()
