@@ -1,5 +1,14 @@
 from pydantic import BaseModel, Field, ConfigDict, computed_field
 from datetime import datetime
+from enum import StrEnum
+
+
+class Department(StrEnum):
+    SCIENCE = "Science"
+    ARTS = "Arts"
+    COMMERCE = "Commerce"
+    ENGINEERING = "Engineering"
+    MEDICINE = "Medicine"
 
 
 class Student(BaseModel):
@@ -12,6 +21,7 @@ class Student(BaseModel):
     def full_name(self) -> str:
         return f"{self.name} {self.surname}"
 
+    department: Department
     age: int | None = Field(ge=0, le=150, default=None)
     grade: int | None = Field(ge=1, le=20, default=None)
     absences: int | None = Field(ge=0, le=100, default=None)

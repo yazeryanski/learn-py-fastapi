@@ -1,6 +1,6 @@
 from faker import Faker
 from time import time
-from src.models.student import Student
+from src.models.student import Department, Student
 from typing import List
 
 # [BENCHMARK] benchmarking the data generation process
@@ -17,7 +17,8 @@ for i in range(20):
             surname=faker.last_name(),
             age=faker.random_int(min=17, max=45),
             grade=faker.random_int(min=1, max=20),
-            absences=faker.random_int(min=0, max=100)
+            absences=faker.random_int(min=0, max=100),
+            department=faker.random_element(elements=list(Department))
         )
     )
 
