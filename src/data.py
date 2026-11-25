@@ -1,6 +1,7 @@
 from faker import Faker
 from time import time
-from src.models.student import Department, Student
+from src.models.students_model import Department, Student
+from src.utils.unique_id import get_unique_id
 
 
 # [BENCHMARK] benchmarking the data generation process
@@ -14,7 +15,7 @@ faker = Faker()
 for i in range(500):
     students.append(
         Student(
-            id=i,
+            id=get_unique_id(),
             name=faker.first_name(),
             surname=faker.last_name(),
             age=faker.random_int(min=17, max=45),
